@@ -1,27 +1,44 @@
-class student:
-    def __init__(self,name,reg,m1,m2,m3):
-        self.name=name
-        self.reg=reg
-        self.marks1=m1
-        self.marks2=m2
-        self.marks3=m3
-def display(reg):
-    for st in s:
-        if st.reg==reg:
-            print("name=",st.name)
-            print("reg no=",st.reg)
-            print("marks1=",st.marks1)
-            print("marks2=",st.marks2)
-            print("marks3=",st.marks3) 
-s=[]
-n=int(input("enter the number of student"))
-for i in range(n):
-    name=input("enter the name:")
-    reg=int(input("enter the reg no:"))
-    marks1=int(input("enter the marks1:"))
-    marks2=int(input("enter the marks2:"))
-    marks3=int(input("enter the marks3:"))
-    st=student(name,reg,marks1,marks2,marks3)
-    s.append(st)
-k=int(input("enter the reg number of student hows detail needed"))
-display(k)
+#parking slot
+class ParkingLot:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.current_count = 0
+        self.parking_slots = []
+    def park_vehicle(self):
+        if self.current_count < self.capacity:
+            car_number = input("Enter vehicle number to park: ")
+            self.parking_slots.append(car_number)
+            self.current_count += 1
+            print(f"Vehicle {car_number} parked successfully.")
+        else:
+            print("Parking lot is full. Cannot park vehicle.")
+    def exit_vehicle(self):
+        car_number = input("Enter vehicle number to exit: ")
+        if car_number in self.parking_slots:
+            self.parking_slots.remove(car_number)
+            self.current_count -= 1
+            print(f"Vehicle {car_number} exited successfully.")
+        else:
+            print(f"Vehicle {car_number} not found in parking lot.")
+    def display_status(self):
+        print(f"Current number of vehicles parked: {self.current_count}/{self.capacity}")
+        print("Vehicles parked: ", self.parking_slots)
+parking_lot = ParkingLot(20)
+while True:
+    print("\nMenu:")
+    print("1. Park a vehicle")
+    print("2. Exit a vehicle")
+    print("3. Display parking status")
+    print("4. Exit the program")
+    choice = input("Enter your choice (1/2/3/4): ")
+    if choice == '1':
+        parking_lot.park_vehicle()
+    elif choice == '2':
+        parking_lot.exit_vehicle()
+    elif choice == '3':
+        parking_lot.display_status()
+    elif choice == '4':
+        print("Exiting the program...")
+        break
+    else:
+        print("Invalid choice. Please enter 1, 2, 3, or 4.")
